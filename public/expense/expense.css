@@ -1,0 +1,173 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.heading{
+    margin-top: 0;
+    padding: 5px;
+    background-color: #4b4a4a;
+    color:antiquewhite;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.daily_container {
+    margin-top: 5px;
+    margin-left: 10px;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto;
+    gap: 10px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* Style the boxes inside the container */
+.daily_center-box {
+    flex: 1;
+    width: max-content;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the input element */
+#selectDate {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style the headings */
+.daily_center-box h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+
+.myForm_daily {
+    flex: 1;
+    background-color: lightgrey;
+    padding: 20px;
+    border-radius: 10px;
+    margin: auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.myForm_daily div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="date"],
+select,
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 14px;
+}
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button[type="submit"] {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button[type="submit"]:hover {
+    background-color: #444;
+}
+
+/* table */
+#data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
+    margin-right: 10px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+}
+
+#data-table th,
+#data-table td {
+    border: 1px solid #363434;
+    padding: 8px;
+    text-align: center;
+}
+
+#data-table th {
+    background-color: #f2f2f2;
+}
+
+#data-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#data-table tr:hover {
+    background-color: #ddd;
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 768px) {
+    .daily_container {
+        grid-template-columns: 1fr;
+    }
+
+    .main-header-nav {
+        flex-direction: column;
+    }
+
+    .main-header-nav ul {
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .main-header-nav li {
+        margin: 10px 0;
+    }
+
+    .daily_center-box,
+    .myForm_daily {
+        padding: 15px;
+    }
+
+    input[type="date"],
+    select,
+    input[type="number"] {
+        padding: 5px;
+    }
+
+    button[type="submit"] {
+        padding: 8px 16px;
+    }
+}
