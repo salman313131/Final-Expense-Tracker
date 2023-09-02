@@ -46,5 +46,5 @@ Saveurl.belongsTo(User)
 
 //datbase sync
 sequelize.sync().then(()=>{
-    app.listen(8000)
+    app.listen(process.env.PORT || 3000)
 }).catch(err=>console.log(error))
