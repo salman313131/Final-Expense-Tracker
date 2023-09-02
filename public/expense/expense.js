@@ -53,36 +53,41 @@ function showOutput(user){
 }
 
 //add button
-function addButton(j){
-    const newBtn = document.createElement('button')
-    newBtn.classList.add("number-button")
-    newBtn.textContent = j
-    buttonList.appendChild(newBtn)
+function showButton(data){
+    buttonList.innerHTML = ''
+    if(data.previous){
+        const newBtn = document.createElement('button')
+        newBtn.classList.add('pagination')
+        newBtn.id = data.previous.page
+        newBtn.textContent = 'previous'
+        buttonList.appendChild(newBtn)
+    }
+    if(data.next){
+        const newBtn = document.createElement('button')
+        newBtn.classList.add('pagination')
+        newBtn.id = data.next.page
+        newBtn.textContent = 'next'
+        buttonList.appendChild(newBtn)
+    }
 }
 
 //Showing Expense
-async function showAll(){
+async function showAll(page,limit){
     try {
         const token = localStorage.getItem('token')
         const headers = {
   'Content-Type': 'application/json',
   'Authorization': token 
 };
-        const response = await axios.get('/api/v1/expense',{headers})
-        const user = response.data.users
+        const response = await axios.get(`/api/v1/expense/?page=${page}&limit=${limit}`,{headers})
+        const user = response.data.finalresult.users
         if(response.data.ispremium === true){
             buttonDisplay()
         }
-        const numberOfButton = Math.round(user.length/4)
-        if(numberOfButton>1){
-            for(let j=1;j<=numberOfButton;j++){
-                addButton(j)
-            }
-        }
-        const minUser = Math.min(user.length,4)
-        for (let i=0;i<minUser;i++){
+        for (let i=0;i<user.length;i++){
             showOutput(user[i])
         }
+        showButton(response.data.finalresult)
     } catch (error) {
         console.log(error)
     }
@@ -121,7 +126,7 @@ async function onSubmit(e){
             'Authorization': token 
         };
         await axios.post('/api/v1/expense/add',sendData,{headers})
-        showAll()
+        showAll(1,2)
         salaryData.value=''
     } catch (error) {
         console.log(error)
@@ -131,7 +136,14 @@ async function onSubmit(e){
 //onload
 document.addEventListener('DOMContentLoaded',async (e)=>{
     e.preventDefault();
-    showAll()
+    const limit = localStorage.getItem('limit')
+    if(limit){
+        showAll(1,limit)
+
+    }
+    else{
+        showAll(1,2)
+    }
 })
 
 //delete
@@ -162,18 +174,14 @@ function buttonDisplay(){
     const rzpButton1 = document.getElementById('rzp-button1')
     rzpButton1.style.display = 'none';
     premiumMessage.textContent = 'You are a Premium User!!!'
-    const dailyButton = document.createElement('button')
-    dailyButton.textContent = 'Daily'
-    const monthlyButton = document.createElement('button')
-    monthlyButton.textContent = 'Monthly'
-    const yearlyButton = document.createElement('button')
-    yearlyButton.textContent = 'Yearly'
+    const dailyButton = document.getElementById('dailyBtn')
+    dailyButton.style.display =''
+    const monthlyButton = document.getElementById('monthlyBtn')
+    monthlyButton.style.display =''
+    const yearlyButton = document.getElementById('yearlyBtn')
+    yearlyButton.style.display =''
     const pmessage = document.getElementById('pmessage')
     pmessage.textContent = 'Click the button to see advance features(Only for premium users)'
-    premiumFeatureDisplay.appendChild(pmessage)
-    premiumFeatureDisplay.appendChild(dailyButton)
-    premiumFeatureDisplay.appendChild(monthlyButton)
-    premiumFeatureDisplay.appendChild(yearlyButton)
 }
 
 //premium User
@@ -242,14 +250,21 @@ previousDownload.addEventListener('click',()=>{
 })
 
 //button-toggle
-const buttons = document.querySelectorAll('.number-button');
-    let activeButton = null;
-    buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-        if (activeButton) {
-                activeButton.classList.remove('active');
-            }
-            button.classList.add('active');
-            activeButton = button;
-        });
-    });
+buttonList.addEventListener('click',buttonToggle)
+async function buttonToggle(e){
+    e.preventDefault();
+    if(e.target.classList.contains('pagination')){
+        const page = parseInt(e.target.id)
+        tbody.innerHTML =''
+        showAll(page,2)
+    }
+}
+
+//limit selection
+const limitSelect = document.getElementById('limitSelection')
+limitSelect.addEventListener('change',()=>{
+    const limit = parseInt(limitSelect.value)
+    localStorage.setItem('limit',limit)
+    tbody.innerHTML=''
+    showAll(1,limit)
+})

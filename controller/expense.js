@@ -41,11 +41,27 @@ exports.downloadFiles= async(req,res,next)=>{
     }
 }
 
-exports.getAllDetails=((req,res,next)=>{
-    Expense.findAll({where:{userId:req.user.id}})
-    .then(users=>{
-        res.json({users,ispremium:req.user.ispremiumuser})
-    }).catch(err=>console.log(err))
+exports.getAllDetails=(async (req,res,next)=>{
+    const page = parseInt(req.query.page)
+    const limit = parseInt(req.query.limit)
+    const startIndex = (page-1)*limit
+    const endIndex = page*limit
+    try {
+        const result = await Expense.findAll({where:{userId:req.user.id}})
+        const finalresult = {}
+        if(endIndex<result.length){
+
+            finalresult.next = {page:page+1,limit:limit}
+        }
+        if(startIndex>0){
+
+            finalresult.previous = {page:page-1,limit:limit}
+        }
+        finalresult.users = result.slice(startIndex,endIndex)
+        res.status(200).json({finalresult,ispremium:req.user.ispremiumuser})
+    } catch (error) {
+        res.status(500).json(error)
+    }
 })
 // exports.getDetail = ((req,res,next)=>{
 //     const userId = req.params.userId

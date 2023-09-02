@@ -42,7 +42,7 @@
                     </form>
                 </div>
             </div>
-            <div class="column">
+            <div class="column table-column">
                 <table id="data-table">
                     <thead>
                         <tr>
@@ -56,20 +56,33 @@
                     </thead>
                     <tbody id="tabel-tbody">
                     </tbody>
-                    <div id="buttonList" class="button-container"></div>
                 </table>
+                <select id="limitSelection">
+                    <option selected>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                </select>
+                <div class="button-container" id="buttonList">
+                </div>
             </div>
             <div>
                 <button id="rzp-button1">Buy Premium</button>
                 <p id="premiumMessage"></p>
 
             </div>
+            <div id="downloadDiv">
+                <button id="downloadButton">Download</button>
+                <button id="previosDownload">Previous Download</button>
+            </div>
             <div id="premiumFeatureDisplay">
-                <div id="downloadDiv">
-                    <button id="downloadButton">Download</button>
-                    <button id="previosDownload">Previous Download</button>
-                </div>
+                <div id="premiumFeatureDisplayinner"></div>
                 <p id="pmessage">Buy Premium to see premium features</p>
+                <button style="display: none;" id="dailyBtn">Daily</button>
+                <button style="display: none;" id="monthlyBtn">Monthly</button>
+                <button style="display: none;" id="yearlyBtn">Yearly</button>
             </div>
         </div>
     <script src="expense.js"></script>
