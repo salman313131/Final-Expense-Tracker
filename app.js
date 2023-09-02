@@ -14,12 +14,14 @@ const userRouter = require('./router/user')
 const expenseRouter = require('./router/expense')
 const orderRouter = require('./router/purchase')
 const forgotRouter = require('./router/forgot')
+const saveurlRouter = require('./router/previous')
 
 //Modal
 const User = require('./model/user')
 const Expense = require('./model/expense')
 const Order = require('./model/order')
 const Forgot = require('./model/forgot')
+const Saveurl = require('./model/saveurl')
 
 app.use(express.static('./public'))
 app.use(bodyParser.urlencoded({extended:true}))
@@ -27,6 +29,7 @@ app.use(express.json());
 
 //api
 app.use('/api/v1',userRouter)
+app.use('/api/v1',saveurlRouter)
 app.use('/api/v1/expense',expenseRouter)
 app.use('/purchase',orderRouter)
 app.use('/',forgotRouter)
@@ -38,6 +41,8 @@ User.hasMany(Order)
 Order.belongsTo(User)
 User.hasMany(Forgot)
 Forgot.belongsTo(User)
+User.hasMany(Saveurl)
+Saveurl.belongsTo(User)
 
 //datbase sync
 sequelize.sync().then(()=>{

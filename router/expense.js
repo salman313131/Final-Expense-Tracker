@@ -4,6 +4,7 @@ const auth = require('../middleware/auth')
 const expenseController = require('../controller/expense')
 
 router.get('/',auth,expenseController.getAllDetails)
+router.get('/download',auth,expenseController.downloadFiles)
 router.post('/add',auth,expenseController.postDetails)
 router.delete('/:userId',auth,expenseController.deleteUser)
 // router.get('/:userId',expenseController.getDetail)

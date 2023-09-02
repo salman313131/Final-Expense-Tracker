@@ -6,6 +6,7 @@ const hiddenMessage = document.getElementById('hidden_message')
 const tbody = document.getElementById('tabel-tbody')
 const premiumMessage = document.getElementById('premiumMessage')
 const premiumFeatureDisplay = document.getElementById('premiumFeatureDisplay')
+const buttonList = document.getElementById('buttonList')
 
 function populateCategory(selectSalary){
     categorySelect.innerHTML = ''
@@ -17,6 +18,12 @@ function populateCategory(selectSalary){
         categorySelect.appendChild(option)
     }
 }
+
+//hide downloadbutton for non-premium users
+const downloadbutton = document.getElementById('downloadButton')
+const previousDownload = document.getElementById('previosDownload')
+downloadbutton.style.display = 'none'
+previousDownload.style.display = 'none'
 
 //Populating category
 spendingSalarySelect.addEventListener('change', ()=>{
@@ -45,6 +52,14 @@ function showOutput(user){
     tbody.appendChild(row);
 }
 
+//add button
+function addButton(j){
+    const newBtn = document.createElement('button')
+    newBtn.classList.add("number-button")
+    newBtn.textContent = j
+    buttonList.appendChild(newBtn)
+}
+
 //Showing Expense
 async function showAll(){
     try {
@@ -58,7 +73,14 @@ async function showAll(){
         if(response.data.ispremium === true){
             buttonDisplay()
         }
-        for (i=0;i<user.length;i++){
+        const numberOfButton = Math.round(user.length/4)
+        if(numberOfButton>1){
+            for(let j=1;j<=numberOfButton;j++){
+                addButton(j)
+            }
+        }
+        const minUser = Math.min(user.length,4)
+        for (let i=0;i<minUser;i++){
             showOutput(user[i])
         }
     } catch (error) {
@@ -135,6 +157,8 @@ async function onDelete(e){
 
 //premium User features
 function buttonDisplay(){
+    downloadbutton.style.display = ''
+    previousDownload.style.display = ''
     const rzpButton1 = document.getElementById('rzp-button1')
     rzpButton1.style.display = 'none';
     premiumMessage.textContent = 'You are a Premium User!!!'
@@ -144,9 +168,8 @@ function buttonDisplay(){
     monthlyButton.textContent = 'Monthly'
     const yearlyButton = document.createElement('button')
     yearlyButton.textContent = 'Yearly'
-    const pmessage = document.createElement('p')
+    const pmessage = document.getElementById('pmessage')
     pmessage.textContent = 'Click the button to see advance features(Only for premium users)'
-    premiumFeatureDisplay.innerHTML=''
     premiumFeatureDisplay.appendChild(pmessage)
     premiumFeatureDisplay.appendChild(dailyButton)
     premiumFeatureDisplay.appendChild(monthlyButton)
@@ -187,3 +210,46 @@ document.getElementById('rzp-button1').onclick = async function(e){
         console.log(error)
     }
 }
+
+//download file
+downloadbutton.addEventListener('click',onDownload)
+async function onDownload(e){
+    e.preventDefault();
+    try {
+        const token1 = localStorage.getItem('token')
+        const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token1 
+        };
+        const response = await axios.get('/api/v1/expense/download',{headers})
+        if(response.status == 200){
+            const a = document.createElement('a')
+            a.href = response.data.fileUrl
+            a.download = 'myexpense.csv'
+            a.click()
+        }
+        else{
+            throw new Error(response.data.message)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+//previous download
+previousDownload.addEventListener('click',()=>{
+    window.location.href = '../previouslink.html'
+})
+
+//button-toggle
+const buttons = document.querySelectorAll('.number-button');
+    let activeButton = null;
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+        if (activeButton) {
+                activeButton.classList.remove('active');
+            }
+            button.classList.add('active');
+            activeButton = button;
+        });
+    });
