@@ -1,0 +1,1 @@
+::1 - - [03/Sep/2023:03:26:58 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8000/signup/signup.html" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
