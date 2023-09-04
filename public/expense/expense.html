@@ -13,7 +13,7 @@
     <h1 class="heading">Expense Tracker</h1>
         <div class="daily_container" id="daily">
             
-            <div class="column">
+            <div class="column input-column">
 
                 <div class="daily_center-box">
 
@@ -26,7 +26,7 @@
                             <label for="spending">Select type:</label>
                             <select id="spending" name="spending">
                                 <option value="salary">Salary</option>
-                                <option value="spending">Spending</option>
+                                <option value="spending" selected>Spending</option>
                             </select>
                             <div id="subCategoryContainer">
                                 <label for="categorySelect">Category:</label>
@@ -57,32 +57,35 @@
                     <tbody id="tabel-tbody">
                     </tbody>
                 </table>
-                <select id="limitSelection">
-                    <option selected>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                </select>
+                <div class="dynamic-select">
+
+                    <select id="limitSelection">
+                        <option selected>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                    </select>
+                </div>
                 <div class="button-container" id="buttonList">
                 </div>
+                <p id="noPagination-message" style="display: none; color: #d60909; margin-left: 300px;">Dead End(No content)!!</p>
             </div>
-            <div>
+            <div class="column premium-column">
                 <button id="rzp-button1">Buy Premium</button>
                 <p id="premiumMessage"></p>
-
+                <div id="premiumFeatureDisplay">
+                    <div id="premiumFeatureDisplayinner"></div>
+                    <p id="pmessage">Buy Premium to see premium features</p>
+                    <button style="display: none;" id="dailyBtn">Daily</button>
+                    <button style="display: none;" id="monthlyBtn">Monthly</button>
+                    <button style="display: none;" id="yearlyBtn">Yearly</button>
+                </div>
             </div>
-            <div id="downloadDiv">
+            <div id="downloadDiv" class="column download-column">
                 <button id="downloadButton">Download</button>
                 <button id="previosDownload">Previous Download</button>
-            </div>
-            <div id="premiumFeatureDisplay">
-                <div id="premiumFeatureDisplayinner"></div>
-                <p id="pmessage">Buy Premium to see premium features</p>
-                <button style="display: none;" id="dailyBtn">Daily</button>
-                <button style="display: none;" id="monthlyBtn">Monthly</button>
-                <button style="display: none;" id="yearlyBtn">Yearly</button>
             </div>
         </div>
     <script src="expense.js"></script>

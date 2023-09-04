@@ -61,11 +61,21 @@ function showButton(data){
         newBtn.id = data.previous.page
         newBtn.textContent = 'previous'
         buttonList.appendChild(newBtn)
+    }else{
+        const newBtn = document.createElement('button')
+        newBtn.classList.add('noPagination')
+        newBtn.textContent = 'previous'
+        buttonList.appendChild(newBtn)
     }
     if(data.next){
         const newBtn = document.createElement('button')
         newBtn.classList.add('pagination')
         newBtn.id = data.next.page
+        newBtn.textContent = 'next'
+        buttonList.appendChild(newBtn)
+    }else{
+        const newBtn = document.createElement('button')
+        newBtn.classList.add('noPagination')
         newBtn.textContent = 'next'
         buttonList.appendChild(newBtn)
     }
@@ -127,6 +137,10 @@ async function onSubmit(e){
             'Authorization': token 
         };
         await axios.post('/api/v1/expense/add',sendData,{headers})
+        hiddenMessage.style.display = '';
+        setTimeout(()=>{
+            hiddenMessage.style.display='none'
+        },2000)
         showAll(1,2)
         salaryData.value=''
     } catch (error) {
@@ -145,6 +159,7 @@ document.addEventListener('DOMContentLoaded',async (e)=>{
     else{
         showAll(1,2)
     }
+    populateCategory('spending')
 })
 
 //delete
@@ -263,6 +278,13 @@ async function buttonToggle(e){
         else{
             showAll(page,2)
         }
+    }
+    if(e.target.classList.contains('noPagination')){
+        const pageing = document.getElementById('noPagination-message')
+        pageing.style.display = ''
+        setTimeout(()=>{
+            pageing.style.display = 'none';
+        },2000)
     }
 }
 

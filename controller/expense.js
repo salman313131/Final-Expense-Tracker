@@ -75,7 +75,6 @@ exports.postDetails = (async(req,res,next)=>{
         const jsonData = req.body
         const newExpenseData = Number(jsonData.spending)+Number(req.user.totalExpense)
         const newIncomeData = Number(jsonData.salary)+Number(req.user.totalSalary)
-        console.log(newExpenseData,newIncomeData)
         const addExpense = Expense.create({day: jsonData.day,date: jsonData.date,month: jsonData.month,year: jsonData.year,salary: jsonData.salary,spending: jsonData.spending,category: jsonData.category,userId:req.user.id},{transaction:t})
         const addUserExpense = req.user.update({totalExpense:newExpenseData,totalSalary:newIncomeData},{transaction:t})
         const result = await Promise.all([addExpense,addUserExpense])
