@@ -73,6 +73,7 @@ function showButton(data){
 
 //Showing Expense
 async function showAll(page,limit){
+    tbody.innerHTML = '';
     try {
         const token = localStorage.getItem('token')
         const headers = {
@@ -159,7 +160,6 @@ async function onDelete(e){
 
             };
             await axios.delete(`/api/v1/expense/${id}`,{headers})
-            tbody.innerHTML=''
             showAll()
         } catch (error) {
             console.log(error)
@@ -255,8 +255,14 @@ async function buttonToggle(e){
     e.preventDefault();
     if(e.target.classList.contains('pagination')){
         const page = parseInt(e.target.id)
-        tbody.innerHTML =''
-        showAll(page,2)
+        const limit = localStorage.getItem('limit')
+        if(limit){
+
+            showAll(page,limit)
+        }
+        else{
+            showAll(page,2)
+        }
     }
 }
 
