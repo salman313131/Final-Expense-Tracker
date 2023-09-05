@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily</title>
+    <link rel="stylesheet" href="daily.css">
+</head>
+<body>
+    <div class="heading">
+        <h1>Daily Data</h1>
+    </div>
+
+    <div class="container">
+        <div class="column table-column">
+            <div class="table1">
+
+                <table id="data-table-spending">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Spending</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabel-tbody-spending">
+                    </tbody>
+                </table>
+            </div>
+            <div class="table2">
+
+                <table id="data-table-salary">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Salary</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabel-tbody-salary">
+                    </tbody>
+                </table>
+            </div>
+            <div class="table3">
+                <table id="total-table">
+                    <thead>
+                        <tr>
+                            <th>Total Income</th>
+                            <th>Total Expenditure</th>
+                            <th>Total Savings</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabel-tbody-total"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="column column-graph">
+            <canvas id="myChart"></canvas>
+            <canvas id="myGraph"></canvas>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="daily.js"></script>
+</body>
+</html>

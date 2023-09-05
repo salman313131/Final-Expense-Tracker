@@ -296,3 +296,14 @@ limitSelect.addEventListener('change',()=>{
     tbody.innerHTML=''
     showAll(1,limit)
 })
+
+//button command
+document.getElementById('dailyBtn').addEventListener('click',()=>{
+    window.location.href='../daily/daily.html'
+})
+document.getElementById('monthlyBtn').addEventListener('click',()=>{
+    window.location.href='../monthly/monthly.html'
+})
+document.getElementById('yearlyBtn').addEventListener('click',()=>{
+    window.location.href='../yearly/yearly.html'
+})

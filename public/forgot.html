@@ -2,10 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
     <title>Sign Up</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;">
     <style>
         #Forgot-form {
   text-align: center;
@@ -78,25 +77,26 @@ button[type="submit"]:hover {
             <p id="message"></p>
         </form>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
-            const myForm = document.getElementById('Forgot-form')
+          const myForm = document.getElementById('Forgot-form')
             const emailInput = document.getElementById('email')
             const passwordInput = document.getElementById('password')
             const message = document.getElementById('message')
             myForm.addEventListener('submit', async function (e) {
-                e.preventDefault();
-                try {
-                    await axios.get('/password/update', {
-                        params: {
-                            email: emailInput.value,
-                            password: passwordInput.value
-                        }
-                    })
-                    message.textContent = 'Password updated successfully!!!'
-                } catch (error) {
-                    console.log(error)
-                }
+              console.log(emailInput.value, passwordInput.value)
+              e.preventDefault();
+              try {
+                await axios.get(`/password/update/?email=${emailInput.value}&password=${passwordInput.value}`
+                  // params: {
+                  //     email: emailInput.value,
+                  //     password: passwordInput.value
+                  // }
+                )
+                message.textContent = 'Password updated successfully!!!'
+              } catch (error) {
+                console.log(error)
+              }
             })
         </script>
 </body>

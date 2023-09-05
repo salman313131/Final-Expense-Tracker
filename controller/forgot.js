@@ -61,8 +61,8 @@ exports.getLink = async (req,res,next)=>{
 }
 
 exports.completedReset = async (req,res,next)=>{
+        console.log(req.query)
         const { email,password } = req.query
-        console.log(email,password)
     try {
         const salt=10
         const hashedPassword = await bcrypt.hash(password,salt)

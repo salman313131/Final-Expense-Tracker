@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="yearly.css">
+</head>
+
+<body>
+    <div class="heading">
+        <h1>Yearly</h1>
+    </div>
+    <div class="select-container">
+        <select id="year">
+        </select>
+        <button id="yearly"
+            style="background-color: rgb(56, 56, 58); color: white; border: none; padding: 10px 20px; cursor: pointer;">Click</button>
+    </div>
+    <div class="display-container">
+        <div class="table-display">
+            <table id="data-table-salary">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Salary</th>
+                        <th>Spending</th>
+                    </tr>
+                </thead>
+                <tbody id="tabel-tbody-salary">
+                </tbody>
+            </table>
+        </div>
+        <div class="chart-dispaly">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+    <script src="yearly.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+
+</html>

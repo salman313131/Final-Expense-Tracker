@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* display: block; */
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.heading {
+    padding: 5px;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    background-color: #e2dcdc;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.select-container{
+    margin-top: 10px;
+    margin-left: 500px;
+    margin-right: 500px;
+    align-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 5px;
+    justify-content: center;
+}
+#year,
+#month,
+#monthly{
+    border-radius: 5px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+table th,
+table td {
+    border: 1px solid rgba(54, 52, 52, 0.3);
+    border-radius: 5px;
+    padding: 8px;
+    text-align: center;
+    width: 100px;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+table tr:nth-child(even) {
+    background-color: #ecebeb;
+}
+
+.table-display{
+    margin: 50px;
+}

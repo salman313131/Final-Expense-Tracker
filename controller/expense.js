@@ -63,12 +63,14 @@ exports.getAllDetails=(async (req,res,next)=>{
         res.status(500).json(error)
     }
 })
-// exports.getDetail = ((req,res,next)=>{
-//     const userId = req.params.userId
-//     ExpenseDetail.findByPk(userId).then(response=>{
-//         res.json({response})
-//     }).catch(err=>console.log(err))
-// })
+exports.getDetail = (async (req,res,next)=>{
+    try {
+        const response = await Expense.findAll()
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(500).json({success:false,error})
+    }
+})
 exports.postDetails = (async(req,res,next)=>{
     const t = await sequelize.transaction()
     try {
