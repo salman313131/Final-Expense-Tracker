@@ -175,7 +175,14 @@ async function onDelete(e){
 
             };
             await axios.delete(`/api/v1/expense/${id}`,{headers})
-            showAll()
+            const limit = localStorage.getItem('limit')
+            if(limit){
+                showAll(1,limit)
+            }
+            else{
+
+                showAll(1,2)
+            }
         } catch (error) {
             console.log(error)
         }

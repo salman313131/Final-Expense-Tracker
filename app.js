@@ -4,7 +4,7 @@ require("dotenv").config()
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const helmet = require('helmet')
+// const helmet = require('helmet')
 const morgan = require('morgan')
 const fs = require('fs')
 const path = require('path')
@@ -35,7 +35,7 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname,'access.log'),{
 app.use(express.static('./public'))
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json());
-app.use(helmet())
+// app.use(helmet())
 app.use(morgan('combined',{stream:accessLogStream}))
 
 //api

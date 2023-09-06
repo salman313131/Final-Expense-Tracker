@@ -4,7 +4,6 @@
 <head>
   
     <title>Sign Up</title>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;">
     <style>
         #Forgot-form {
   text-align: center;
@@ -87,12 +86,14 @@ button[type="submit"]:hover {
               console.log(emailInput.value, passwordInput.value)
               e.preventDefault();
               try {
-                await axios.get(`/password/update/?email=${emailInput.value}&password=${passwordInput.value}`
-                  // params: {
-                  //     email: emailInput.value,
-                  //     password: passwordInput.value
-                  // }
-                )
+                await axios.get(`/password/update`,{
+
+                  params: {
+                    email: emailInput.value,
+                    password: passwordInput.value
+                  }
+                }
+                  )
                 message.textContent = 'Password updated successfully!!!'
               } catch (error) {
                 console.log(error)
